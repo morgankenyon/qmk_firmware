@@ -22,8 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //1 = characters
 //2 = navigation
 //3 = function keys
-//ARSTQWFwfwfNE
-//arstarst
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
@@ -44,7 +43,7 @@ OSM(MOD_LCTL),    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                     
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
 OSM(MOD_LSFT), KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_PIPE, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-OSM(MOD_LCTL), KC_TILD,  KC_GRV, KC_PLUS,  KC_EQL, KC_MINS,                      KC_UNDS, KC_LCBR, KC_RCBR, KC_LBRC, KC_RBRC, KC_CIRC,
+OSM(MOD_LCTL), KC_TILD,  KC_GRV, KC_MINS, KC_UNDS, KC_PLUS,                       KC_EQL, KC_LCBR, KC_RCBR, KC_LBRC, KC_RBRC, KC_CIRC,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                            KC_LGUI,  KC_BSPC, TO(2),       TO(0),KC_SPC, KC_ENT
                                    //`--------------------------'  `--------------------------'
@@ -52,11 +51,11 @@ OSM(MOD_LCTL), KC_TILD,  KC_GRV, KC_PLUS,  KC_EQL, KC_MINS,                     
 
   [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB, XXXXXXX, KC_SLSH,  KC_DEL, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, KC_HOME,  KC_END, XXXXXXX, XXXXXXX,
+       KC_TAB, XXXXXXX, KC_SLSH,  KC_DEL, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, KC_HOME,  KC_END, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
 OSM(MOD_LSFT), KC_LGUI, KC_LCTL, KC_LSFT, KC_LALT, XXXXXXX,                      XXXXXXX, KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-OSM(MOD_LCTL),LCTL(KC_Z),LCTL(KC_X),LCTL(KC_C),TO(3),LCTL(KC_V),               XXXXXXX, XXXXXXX, KC_PGUP, KC_PGDN, XXXXXXX, XXXXXXX,
+OSM(MOD_LCTL),LCTL(KC_Z),LCTL(KC_X),LCTL(KC_C),TO(3),LCTL(KC_V),                 XXXXXXX,    KC_S, KC_PGUP, KC_PGDN, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                            KC_LALT,  KC_BSPC, TO(1),      TO(0),KC_SPC, KC_ENT
                                       //`--------------------------'  `--------------------------'
@@ -64,26 +63,27 @@ OSM(MOD_LCTL),LCTL(KC_Z),LCTL(KC_X),LCTL(KC_C),TO(3),LCTL(KC_V),               X
 
   [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   KC_F5, XXXXXXX,                      XXXXXXX,   KC_F8, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+       KC_TAB, XXXXXXX, XXXXXXX, XXXXXXX,   KC_F5, XXXXXXX,                      XXXXXXX,   KC_F8, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
 OSM(MOD_LSFT),   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F6,                        KC_F7,   KC_F9,  KC_F10,  KC_F11,  KC_F12, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-OSM(MOD_LCTL), XXXXXXX, XXXXXXX, XXXXXXX,   TO(2), XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+OSM(MOD_LCTL), KC_MUTE, KC_VOLD, KC_VOLU,   TO(2), XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           XXXXXXX,  KC_BSPC, TO(1),      TO(0),KC_SPC, KC_ENT
+                                           KC_LALT,  KC_BSPC, TO(1),      TO(0),KC_SPC, KC_ENT
                                       //`--------------------------'  `--------------------------'
   )
 };
 
 void keyboard_post_init_user(void) {
   // Customise these values to desired behaviour
-  debug_enable=true;
+  //debug_enable=true;
   //debug_matrix=true;
-  debug_keyboard=true;
+  //debug_keyboard=true;
   //debug_mouse=true;
 }
 
 void oneshot_mods_changed_user(uint8_t mods) {
+  println("Oneshot mods");
   if (mods & MOD_MASK_SHIFT) {
     println("Oneshot mods SHIFT");
   }
@@ -101,13 +101,13 @@ void oneshot_mods_changed_user(uint8_t mods) {
   }
 }
 
-//bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  // If console is enabled, it will print the matrix position and status of each key pressed
-//#ifdef CONSOLE_ENABLE
-//    uprintf("KL: kc: %u, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
-//#endif 
-//  return true;
-//}
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+// If console is enabled, it will print the matrix position and status of each key pressed
+#ifdef CONSOLE_ENABLE
+    uprintf("KL: kc: %u, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
+#endif 
+  return true;
+}
 
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
